@@ -4,6 +4,6 @@ import java.util.List;
 
 import com.whl.domain.User;
 
-public interface UserService {
+public interface UserService extends BaseService<User> {
 	public List<User> getUserList();
 }

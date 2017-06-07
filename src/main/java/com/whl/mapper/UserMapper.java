@@ -2,10 +2,10 @@ package com.whl.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
-
 import com.whl.domain.User;
 
-public interface UserMapper {
+import tk.mybatis.mapper.common.Mapper;
+
+public interface UserMapper extends Mapper<User> {
 	public List<User> getUserList();
 }

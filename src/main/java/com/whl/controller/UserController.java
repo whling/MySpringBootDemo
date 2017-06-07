@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.whl.domain.User;
 import com.whl.service.UserService;
@@ -21,6 +23,7 @@ public class UserController {
 	private UserService userService;
 
 	@RequestMapping("hello")
+	@ResponseBody
 	public String hello() {
 		int i = 1 / 0;
 		return "hello world";
@@ -40,6 +43,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "user")
+	@ResponseBody
 	public User getUser() {
 		User user = new User();
 		user.setId(1);
@@ -51,6 +55,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "maps")
+	@ResponseBody
 	public Map<String, Object> getMap() {
 		Map<String, Object> map = new ConcurrentHashMap<>();
 		map.put("username", "孙燕姿");
@@ -60,6 +65,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "list")
+	@ResponseBody
 	public List<User> getList() {
 		ArrayList<User> list = new ArrayList<>();
 		User user = new User();
@@ -77,6 +83,7 @@ public class UserController {
 	 * ssm框架整合test
 	 */
 	@RequestMapping("ssm")
+	@ResponseBody
 	public List<User> getUserList() {
 		List<User> userList = userService.getUserList();
 		return userList;
