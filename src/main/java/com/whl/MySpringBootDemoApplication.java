@@ -12,14 +12,8 @@ import org.springframework.context.annotation.ImportResource;
 @SpringBootApplication
 @MapperScan(basePackages = "com.whl.mapper") // 如果不用此注解，那么就要在每个mapper.java上配置@mapper注解
 @EnableCaching
-// @ServletComponentScan
 @ImportResource(value = "classpath:application-service.xml")
 public class MySpringBootDemoApplication {
-	// @Override
-	// protected SpringApplicationBuilder configure(SpringApplicationBuilder
-	// builder) {
-	// return builder.sources(this.getClass());
-	// }
 
 	public static void main(String[] args) {
 		SpringApplication.run(MySpringBootDemoApplication.class, args);

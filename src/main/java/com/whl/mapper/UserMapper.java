@@ -3,9 +3,8 @@ package com.whl.mapper;
 import java.util.List;
 
 import com.whl.domain.User;
+import com.whl.util.mapper.MyMapper;
 
-import tk.mybatis.mapper.common.Mapper;
-
-public interface UserMapper extends Mapper<User> {
+public interface UserMapper extends MyMapper<User> {
 	public List<User> getUserList();
 }
