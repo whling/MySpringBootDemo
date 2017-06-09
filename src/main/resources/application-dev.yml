@@ -37,7 +37,3 @@ mapper:
   not-empty: false
   mappers:
         - com.whl.util.mapper.MyMapper
-
-
-  
-  
