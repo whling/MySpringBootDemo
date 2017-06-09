@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 import com.whl.domain.User;
 import com.whl.mapper.UserMapper;
+import com.whl.register.CustomerBean;
 import com.whl.service.UserService;
 
 @Service
@@ -20,6 +21,9 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	// 注入mapper代理对象
 	@Autowired
 	private UserMapper userMapper;
+
+	@Autowired
+	private CustomerBean customerBean;
 
 	@Value(value = "${jdbc.username}")
 	private String username;
@@ -38,5 +42,8 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 		System.out.println(selectAll.size());
 		return selectAll;
 	}
-
+	@Override
+	public void getSomeData(){
+		customerBean.getSomeData();
+	}
 }

@@ -33,6 +33,11 @@ public class UserMapperTest {
 	@Autowired
 	private UserMapper userMapper;
 
+	@Test
+	public void testUserser() {
+		userService.getSomeData();
+	}
+
 	/**
 	 * 查询
 	 */
