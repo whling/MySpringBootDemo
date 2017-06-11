@@ -8,4 +8,7 @@ public interface UserService extends BaseService<User> {
 	public List<User> getUserList();
 
 	void getSomeData();
+
+	void insertUserTwo();
+
 }

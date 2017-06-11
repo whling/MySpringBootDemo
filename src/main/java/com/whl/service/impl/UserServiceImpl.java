@@ -10,6 +10,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
+import com.whl.customer.CustomerProperties;
 import com.whl.domain.User;
 import com.whl.mapper.UserMapper;
 import com.whl.register.CustomerBean;
@@ -25,6 +26,9 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	@Autowired
 	private CustomerBean customerBean;
 
+	@Autowired
+	private CustomerProperties customerProperties;
+
 	@Value(value = "${jdbc.username}")
 	private String username;
 
@@ -35,15 +39,30 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	public List<User> getUserList() {
 		System.out.println(username);
 		System.out.println("这个方法会将查询结果放入redis缓存中");
-		List<User> list1 = userMapper.getUserList();
+//		List<User> list1 = userMapper.getUserList();
 		// List<User> list = userMapper.selectAll();
 		PageHelper.startPage(0, 2);
 		List<User> selectAll = userMapper.selectAll();
 		System.out.println(selectAll.size());
 		return selectAll;
 	}
+
 	@Override
-	public void getSomeData(){
+	public void getSomeData() {
 		customerBean.getSomeData();
+		System.out.println(customerProperties.getUsername() + "*******" + customerProperties.getAge());
+	}
+
+	@Override
+	public void insertUserTwo() {
+		User user = new User();
+		user.setUsername("无所谓");
+		user.setPassword("sorry");
+		userMapper.insert(user);
+		int i = 1 / 0;
+		User user1 = new User();
+		user1.setUsername("无所谓");
+		user1.setPassword("sorry");
+		userMapper.insert(user1);
 	}
 }

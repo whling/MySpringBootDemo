@@ -1,14 +1,13 @@
 package com.whl.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,77 +15,57 @@ import org.springframework.web.bind.annotation.RestController;
 import com.whl.domain.User;
 import com.whl.service.UserService;
 
-@Controller
+@RestController
 public class UserController {
 	// 注入service服务对象
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping("hello")
-	@ResponseBody
-	public String hello() {
-		int i = 1 / 0;
-		return "hello world";
-	}
-
 	/**
-	 * 访问jsp页面
+	 * 获取user列表
 	 * 
-	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/helloJsp")
-	public String helloJsp(Model model) {
-		System.out.println("HelloController.helloJsp().hello=" + "whling");
-		model.addAttribute("hello", "whling");
-		return "hello";
-	}
-
-	@RequestMapping(value = "user")
-	@ResponseBody
-	public User getUser() {
-		User user = new User();
-		user.setId(1);
-		user.setUsername("周杰伦");
-		user.setScore(100f);
-		user.setAddress("中国台湾");
-		user.setBirthday(new Date());
-		return user;
-	}
-
-	@RequestMapping(value = "maps")
-	@ResponseBody
-	public Map<String, Object> getMap() {
-		Map<String, Object> map = new ConcurrentHashMap<>();
-		map.put("username", "孙燕姿");
-		map.put("address", "新加坡");
-		return map;
-
-	}
-
-	@RequestMapping(value = "list")
-	@ResponseBody
-	public List<User> getList() {
-		ArrayList<User> list = new ArrayList<>();
-		User user = new User();
-		user.setId(1);
-		user.setUsername("周杰伦");
-		user.setScore(232F);
-		user.setAddress("中国台湾");
-		user.setBirthday(new Date());
-		list.add(user);
-		return list;
-
-	}
-
-	/**
-	 * ssm框架整合test
-	 */
-	@RequestMapping("ssm")
-	@ResponseBody
+	@GetMapping("/user")
 	public List<User> getUserList() {
 		List<User> userList = userService.getUserList();
 		return userList;
 	}
 
+	/**
+	 * 获取user
+	 */
+	@RequestMapping("/user/{id}")
+	@ResponseBody
+	public User getUserById(@PathVariable Integer id) {
+		return userService.getByPrimaryKey(id);
+	}
+
+	/**
+	 * 新增user
+	 * 
+	 * @param user
+	 */
+	@PostMapping("/user")
+	public void insertUser(User user) {
+		userService.save(user);
+	}
+
+	/**
+	 * 删除
+	 */
+	@DeleteMapping("/user/{id}")
+	public void deleteUserById(@PathVariable("id") Integer id) {
+		userService.deleteByPrimaryKey(id);
+	}
+
+	/**
+	 * 修改user
+	 * 
+	 * @param user
+	 */
+	@PutMapping("/user")
+	public void updateUser(User user) {
+		userService.updateSelective(user);
+	}
 }

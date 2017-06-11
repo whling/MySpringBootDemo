@@ -43,6 +43,12 @@ public class UserMapperTest {
 	 */
 	@Test
 	public void getUserList() {
+		User user = userService.getByPrimaryKey(new Integer(40));
+		System.out.println(user.getUsername() + "   " + user.getPassword());
+		// List<User> userList = userService.getUserList();
+		// for (User user : userList) {
+		// System.out.println(user);
+		// }
 		// User user = new User();
 		// user.setUsername("钱七");
 		// PageInfo<User> pageInfo = userService.getAll(0, 3);
@@ -58,14 +64,14 @@ public class UserMapperTest {
 		// }
 		// userService.getListByExample(object);
 
-		Example example = new Example(User.class);
-		example.setOrderByClause("score desc"); // 按照score字段倒序排列
-		System.out.println(example.getOrderByClause());
-		example.selectProperties("score"); // 指定只查询哪个属性
-		List<User> list = userService.getListByExample(example);
-		for (User user2 : list) {
-			System.out.println(user2.getScore());
-		}
+		// Example example = new Example(User.class);
+		// example.setOrderByClause("score desc"); // 按照score字段倒序排列
+		// System.out.println(example.getOrderByClause());
+		// example.selectProperties("score"); // 指定只查询哪个属性
+		// List<User> list = userService.getListByExample(example);
+		// for (User user2 : list) {
+		// System.out.println(user2.getScore());
+		// }
 	}
 
 	@Test
@@ -78,6 +84,16 @@ public class UserMapperTest {
 		for (User user : list) {
 			System.out.println(user.getUsername());
 		}
+	}
+
+	/**
+	 * 测试事务
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void insertTwo() throws Exception {
+		userService.insertUserTwo();
 	}
 
 	/**
