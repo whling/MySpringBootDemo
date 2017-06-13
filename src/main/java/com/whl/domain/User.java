@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class User implements Serializable {
 	/**
@@ -24,6 +26,7 @@ public class User implements Serializable {
 	private String password;
 	private String describle;
 	private String address;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date birthday;
 	private Float score;
 

@@ -1,7 +1,7 @@
-#生产环境
-#服务器配置
+#开发环境
+#服务器配置,
 server:
-  port: 8080
+  port: 80
 logging:
   level: 
     com.whl: INFO

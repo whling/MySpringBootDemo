@@ -2,6 +2,8 @@ package com.whl.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,8 @@ import com.whl.service.UserService;
 
 @RestController
 public class UserController {
+	private static final Logger log = LoggerFactory.getLogger(UserController.class);
+
 	// 注入service服务对象
 	@Autowired
 	private UserService userService;
@@ -25,10 +29,13 @@ public class UserController {
 	 * 获取user列表
 	 * 
 	 * @return
+	 * @throws Exception 
 	 */
 	@GetMapping("/user")
-	public List<User> getUserList() {
+	public List<User> getUserList() throws Exception {
+		log.debug("test controller");
 		List<User> userList = userService.getUserList();
+		log.debug("test successful");
 		return userList;
 	}
 
@@ -49,6 +56,7 @@ public class UserController {
 	@PostMapping("/user")
 	public void insertUser(User user) {
 		userService.save(user);
+		System.out.println(user.getId());
 	}
 
 	/**
